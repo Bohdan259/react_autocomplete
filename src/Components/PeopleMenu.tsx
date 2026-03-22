@@ -3,9 +3,9 @@ import { Person } from '../types/Person';
 import classNames from 'classnames';
 
 type Props = {
-  delay: number;
+  delay?: number;
   people: Person[];
-  setSelected: (person: Person | null) => void;
+  onSelected: (person: Person | null) => void;
 };
 
 function debounce<T extends unknown[]>(
@@ -24,8 +24,8 @@ function debounce<T extends unknown[]>(
 
 const PeopleMenuComponent: React.FC<Props> = ({
   people,
-  setSelected,
-  delay,
+  onSelected,
+  delay = 300,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -56,19 +56,20 @@ const PeopleMenuComponent: React.FC<Props> = ({
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuery(event.target.value);
       applyQuery(event.target.value);
-      setSelected(null);
+      onSelected(null);
       setIsOpen(true);
     },
-    [setQuery, applyQuery, setSelected, setIsOpen],
+    [setQuery, applyQuery, onSelected, setIsOpen],
   );
 
   const handleClickInput = useCallback(
     (person: Person) => {
-      setSelected(person);
+      onSelected(person);
       setQuery(person.name);
+      setAppliedQuery(person.name)
       setIsOpen(false);
     },
-    [setSelected, setQuery, setIsOpen],
+    [onSelected, setQuery, setIsOpen],
   );
 
   return (

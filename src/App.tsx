@@ -17,8 +17,7 @@ export const App: React.FC = () => {
         </h1>
         <PeopleMenu
           people={peopleFromServer}
-          setSelected={setSelectedPerson}
-          delay={300}
+          onSelected={setSelectedPerson}
         />
       </main>
     </div>
