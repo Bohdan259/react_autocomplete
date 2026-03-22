@@ -66,10 +66,10 @@ const PeopleMenuComponent: React.FC<Props> = ({
     (person: Person) => {
       onSelected(person);
       setQuery(person.name);
-      setAppliedQuery(person.name)
+      setAppliedQuery(person.name);
       setIsOpen(false);
     },
-    [onSelected, setQuery, setIsOpen],
+    [onSelected, setQuery, setIsOpen, setAppliedQuery],
   );
 
   return (
