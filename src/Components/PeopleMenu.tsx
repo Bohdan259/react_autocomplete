@@ -32,7 +32,7 @@ const PeopleMenuComponent: React.FC<Props> = ({
   const [query, setQuery] = useState('');
   const [appliedQuery, setAppliedQuery] = useState('');
 
-  const applyQuery = useCallback(debounce(setAppliedQuery, delay), []);
+  const applyQuery = useCallback(debounce(setAppliedQuery, delay), [delay]);
 
   const filterPeople = useMemo(() => {
     if (!appliedQuery.trim()) {
@@ -44,7 +44,7 @@ const PeopleMenuComponent: React.FC<Props> = ({
         .toLocaleLowerCase()
         .includes(appliedQuery.toLocaleLowerCase()),
     );
-  }, [appliedQuery]);
+  }, [appliedQuery, people]);
 
   const visiblePeople = useMemo(() => {
     return isFocused ? filterPeople : [];
